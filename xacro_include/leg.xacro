@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+
+<robot name="leg"
+  xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+  xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+
+    <xacro:property name="upper_leg_length" value="0.16" />
+    <xacro:property name="upper_leg_radius" value="0.025" />
+    <xacro:property name="upper_leg_mass" value="0.162" />
+    <xacro:property name="lower_leg_mass" value="0.021" />
+
+    <xacro:macro name="leg" params="prefix rx ry">
+    <joint name="${prefix}HFE" type="revolute">
+        <parent link="base_link"/>
+        <child link="${prefix}upperleg"/>
+        <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="${rx} ${ry} 0"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+
+
+    <link name="${prefix}upperleg">
+        <visual>
+        <origin rpy="0 0 0" xyz="0 0 ${-.5*upper_leg_length}"/>
+        <geometry>
+            <!-- <cylinder length="${upper_leg_length}" radius="${upper_leg_radius}"/> -->
+            <mesh filename="package://robot_properties_quadruped/meshes/cylinder.obj" scale="${upper_leg_radius} ${upper_leg_radius} ${upper_leg_length}"/>
+        </geometry>
+        <material name="grey">
+            <color rgba=".4 .4 .4 .1"/>
+        </material>
+        </visual>
+        <collision>
+        <origin rpy="0 0 0" xyz="0 0 ${-.5*upper_leg_length}"/>
+        <geometry>
+            <cylinder length="${upper_leg_length}" radius="${upper_leg_radius}"/>
+        </geometry>
+        </collision>
+        <inertial>
+        <origin rpy="0 0 0" xyz="0 0 -0.0793"/>
+        <mass value="${upper_leg_mass}"/>
+        <inertia ixy="0.0" ixz="0.0" iyz="0.0"
+            ixx="0.000469609"
+            iyy="0.000469609"
+            izz="1e-6"/>
+        </inertial>
+    </link>
+
+    <joint name="${prefix}KFE" type="revolute">
+        <parent link="${prefix}upperleg"/>
+        <child link="${prefix}shank"/>
+        <limit effort="1000" velocity="10000"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="0 0 ${-upper_leg_length}"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+
+
+    <link name="${prefix}shank">
+        <contact>
+            <lateral_friction value="1.0"/>
+            <restitution value="0.5"/>
+        </contact>
+        <visual>
+        <origin rpy="0 0 0" xyz="0 0 ${-.5*upper_leg_length}"/>
+        <geometry>
+            <!-- <cylinder length="${upper_leg_length}" radius="${upper_leg_radius}"/> -->
+            <mesh filename="package://robot_properties_quadruped/meshes/cylinder.obj" scale="${upper_leg_radius} ${upper_leg_radius} ${upper_leg_length}"/>
+        </geometry>
+        <material name="grey">
+            <color rgba=".4 .4 .4 .1"/>
+        </material>
+        </visual>
+        <collision>
+        <origin rpy="0 0 0" xyz="0 0 ${-.5*upper_leg_length}"/>
+        <geometry>
+            <cylinder length="${upper_leg_length}" radius="${upper_leg_radius}"/>
+        </geometry>
+        </collision>
+        <inertial>
+        <origin rpy="0 0 0" xyz="0 0 -0.0756"/>
+        <mass value="${lower_leg_mass}"/>
+        <inertia ixy="0.0" ixz="0.0" iyz="0.0"
+            ixx="0.000087575"
+            iyy="0.000087575"
+            izz="1e-6"/>
+    </inertial>
+    </link>
+
+    <joint name="${prefix}END" type="fixed">
+        <parent link="${prefix}shank"/>
+        <child link="${prefix}contact"/>
+        <origin rpy="0 0 0" xyz="0 0 ${-upper_leg_length}"/>
+    </joint>
+
+    <link name="${prefix}contact">
+        <contact>
+            <lateral_friction value="1.0"/>
+            <restitution value="0.5"/>
+        </contact>
+        <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <!-- <sphere radius="${upper_leg_radius}"/> -->
+            <mesh filename="package://robot_properties_quadruped/meshes/sphere.obj" scale="${upper_leg_radius} ${upper_leg_radius} ${upper_leg_radius}"/>
+        </geometry>
+        <material name="red">
+            <color rgba="1. 0. 0. 1."/>
+        </material>
+        </visual>
+        <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <sphere radius="${upper_leg_radius}"/>
+        </geometry>
+        </collision>
+        <inertial>
+        <mass value="0.01"/>
+        <inertia ixy="0.0" ixz="0.0" iyz="0.0"
+            ixx="0."
+            iyy="0."
+            izz="0."/>
+    </inertial>
+    </link>
+    </xacro:macro>
+</robot>
