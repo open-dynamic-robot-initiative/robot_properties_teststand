@@ -35,6 +35,7 @@ endforeach(xacro_file_name)
 add_custom_target(${PROJECT_NAME}_urdf_build_files ALL DEPENDS ${urdf_files})
 
 catkin_package()
+catkin_python_setup()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 

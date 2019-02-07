@@ -4,9 +4,9 @@
   xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
   xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
   xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
-  <xacro:property name="base_w" value=".2" />
+  <xacro:property name="base_w" value=".1" />
   <xacro:property name="base_l" value=".2" />
-  <xacro:property name="base_h" value=".2" />
+  <xacro:property name="base_h" value=".1" />
   <xacro:property name="base_m" value="0.485" />
 
   <xacro:include filename="$(find robot_properties_teststand)/xacro_include/leg.xacro" />
@@ -15,13 +15,13 @@
 
    <joint name="joint_z" type="prismatic">
     <parent link="root"/>
-    <child link="base"/>
+    <child link="base_link"/>
     <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
     <axis xyz="0 0 1"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
 
-  <link name="base">
+  <link name="base_link">
     <inertial>
         <origin rpy="0 0 0" xyz="0 0 ${base_h/2.}"/>
         <mass value="${base_m}"/>
