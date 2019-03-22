@@ -32,7 +32,7 @@ device:
     contact_sensors:
       size: 1
     slider_positions:
-      size: 1
+      size: 2
     height_sensors:
       size: 1
     ati_force:
