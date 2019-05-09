@@ -45,6 +45,7 @@ device:
 hardware_communication:
   max_missed_control: 10
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
+  maximum_time_for_user_cmd: 100000
 
 debug_timer_history_length: 0
 
