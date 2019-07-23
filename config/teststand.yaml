@@ -2,21 +2,6 @@ is_real_robot: true
 device:
   name: "hopper_teststand"
   sensors:
-    # motors data
-    motor_positions:
-      size: 2
-    motor_velocities:
-      size: 2
-    motor_currents:
-      size: 2
-    motor_target_currents:
-      size: 2
-    motor_torques:
-      size: 2
-    motor_target_torques:
-      size: 2
-    motor_encoder_indexes:
-      size: 2
     # joints data
     joint_positions:
       size: 2
