@@ -1,3 +1,12 @@
+"""
+@file config.py
+@author Maximilien Naveau (maximilien.naveau@gmail.com)
+@license License BSD-3-Clause
+@copyright Copyright (c) 2019, New York University and Max Planck Gesellschaft.
+@date 2019-05-22
+@brief Define the interface between the control and the hardware
+"""
+
 import numpy as np
 from math import pi
 import rospkg
