@@ -12,10 +12,11 @@ from math import pi
 import rospkg
 from os.path import join
 import pinocchio as se3
+from pinocchio.utils import zero
 
 
 class TeststandConfig:
-    # name that is used by every other entities. I do not exactly why...
+    # name that is used by every other entities.
     robot_name = "teststand"
 
     # PID gains
@@ -83,6 +84,15 @@ class TeststandConfig:
         map_joint_limits[i] = [float(lb), float(ub)]
 
     max_qref = pi
+
+    # Define the initial state.
+    initial_configuration = [0.4, 0.8, -1.6]
+    initial_velocity = 3*[0.0,]
+
+    q0 = zero(robot_model.nq)
+    q0[:] = np.asmatrix(initial_configuration).T
+    v0 = zero(robot_model.nv)
+    a0 = zero(robot_model.nv)
 
     @staticmethod
     def buildRobotWrapper():
