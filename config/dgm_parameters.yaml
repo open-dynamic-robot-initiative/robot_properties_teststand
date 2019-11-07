@@ -42,7 +42,7 @@ hardware_communication:
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
   maximum_time_for_user_cmd: 100000
   calibration:
-    zero_to_index_angle: [0.354043, 0.243433]
+    zero_to_index_angle: [-0.354043, -0.243433]
 
 debug_timer_history_length: 0
 
