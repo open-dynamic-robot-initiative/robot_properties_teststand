@@ -34,7 +34,7 @@ class TeststandConfig:
     yaml_path = (
         join(rospkg.RosPack().get_path("robot_properties_teststand"),
              "config",
-             "teststand.yaml")
+             "dgm_parameters.yaml")
     )
 
     # The inertia of a single blmc_motor
