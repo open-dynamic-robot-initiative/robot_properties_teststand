@@ -10,9 +10,10 @@
 import numpy as np
 from math import pi
 import rospkg
-from os.path import join
+from os.path import join, dirname
 import pinocchio as se3
 from pinocchio.utils import zero
+from pinocchio.robot_wrapper import RobotWrapper
 
 
 class TeststandConfig:
@@ -30,6 +31,10 @@ class TeststandConfig:
              "urdf",
              "teststand.urdf")
     )
+
+    meshes_path = [
+        dirname(rospkg.RosPack().get_path("robot_properties_" + robot_name))
+    ]
 
     yaml_path = (
         join(rospkg.RosPack().get_path("robot_properties_teststand"),
@@ -94,6 +99,11 @@ class TeststandConfig:
     v0 = zero(robot_model.nv)
     a0 = zero(robot_model.nv)
 
-    @staticmethod
-    def buildRobotWrapper():
-        return se3.robot_wrapper.RobotWrapper(TeststandConfig.robot_model)
+    @classmethod
+    def buildRobotWrapper(cls):
+        # Rebuild the robot wrapper instead of using the existing model to
+        # also load the visuals.
+        robot = RobotWrapper.BuildFromURDF(cls.urdf_path, cls.meshes_path)
+        robot.model.rotorInertia[1:] = cls.motor_inertia
+        robot.model.rotorGearRatio[1:] = cls.motor_gear_ration
+        return robot
