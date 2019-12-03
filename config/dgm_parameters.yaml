@@ -34,6 +34,10 @@ device:
       size: 3
     ati_torque:
       size: 3
+    imu_acceleration:
+      size: 3
+    imu_ang_acceleration:
+      size: 3
   controls:
     ctrl_joint_torques:
       size: 2
@@ -44,6 +48,6 @@ hardware_communication:
   calibration:
     index_to_zero_angle: [-0.354043, -0.243433]
 
-debug_timer_history_length: 0
+debug_timer_history_length: 10000
 
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
