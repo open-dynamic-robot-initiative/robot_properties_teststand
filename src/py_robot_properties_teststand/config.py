@@ -64,7 +64,6 @@ class TeststandConfig:
     control_period = 0.001
     dt = control_period
 
-
     # maxCurrent = 12 # Ampers
     max_current = 2
 
@@ -75,16 +74,16 @@ class TeststandConfig:
     max_control = max_current
 
     # mapping between the ctrl vector in the device and the urdf indexes
-    urdf_to_dgm = (0,1,2)
+    urdf_to_dgm = (0, 1, 2)
 
     # ctrl_manager_current_to_control_gain I am not sure what it does so 1.0.
-    ctrl_manager_current_to_control_gain=1.0
+    ctrl_manager_current_to_control_gain = 1.0
 
     map_joint_name_to_id = {}
     map_joint_limits = {}
     for i, (name, lb, ub) in enumerate(zip(robot_model.names[1:],
-                                       robot_model.lowerPositionLimit,
-                                       robot_model.upperPositionLimit)):
+                                           robot_model.lowerPositionLimit,
+                                           robot_model.upperPositionLimit)):
         map_joint_name_to_id[name] = i
         map_joint_limits[i] = [float(lb), float(ub)]
 
@@ -92,7 +91,7 @@ class TeststandConfig:
 
     # Define the initial state.
     initial_configuration = [0.4, 0.8, -1.6]
-    initial_velocity = 3*[0.0,]
+    initial_velocity = 3*[0.0, ]
 
     q0 = zero(robot_model.nq)
     q0[:] = initial_configuration
