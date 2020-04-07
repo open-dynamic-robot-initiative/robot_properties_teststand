@@ -15,9 +15,7 @@ import numpy as np
 
 import pybullet as p
 import pinocchio as se3
-from pinocchio.utils import zero
 
-import py_robot_properties_teststand
 from py_robot_properties_teststand.config import TeststandConfig
 
 
@@ -57,8 +55,8 @@ p.setJointMotorControlArray(
     robotId, [0, 1, 2], p.VELOCITY_CONTROL, forces=np.zeros(3))
 
 # Initial configuration for the robot.
-q = np.matrix([0.3, 0.8, -1.6]).reshape((-1, 1))
-dq = zero(3)
+q = np.array([0.3, 0.8, -1.6])
+dq = np.zeros(3)
 
 
 def setState(q, dq):

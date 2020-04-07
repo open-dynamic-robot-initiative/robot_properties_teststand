@@ -84,8 +84,8 @@ if __name__ == "__main__":
     tau = np.zeros(3)
 
     # Reset the robot to some initial state.
-    q0 = np.matrix(TeststandConfig.initial_configuration).T
-    dq0 = np.matrix(TeststandConfig.initial_velocity).T
+    q0 = TeststandConfig.initial_configuration
+    dq0 = TeststandConfig.initial_velocity
     robot.reset_state(q0, dq0)
 
     # Run the simulator for 100 steps
