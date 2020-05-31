@@ -22,6 +22,13 @@ class TeststandRobot(PinBulletWrapper):
         return physicsClient
     
     def __init__(self, physicsClient=None, fixed_height=None):
+	"""Initializes the TeststandRobot & PyBullet environment.
+
+	Args:
+          physicsClient: (optional) A pybullet physicsClient to reuse
+          fixed_height: (optional) If specified, height above ground to
+              fix the base at.
+        """
         if physicsClient is None:
             self.physicsClient = self.initPhysicsClient()
 
@@ -34,10 +41,11 @@ class TeststandRobot(PinBulletWrapper):
         robotStartPos = [0, 0, 0.0]
         robotStartOrientation = p.getQuaternionFromEuler([0,0,0])
 
+
         self.urdf_path = TeststandConfig.urdf_path
         self.robotId = p.loadURDF(self.urdf_path, robotStartPos,
             robotStartOrientation, flags=p.URDF_USE_INERTIA_FROM_FILE,
-            useFixedBase=False)
+            useFixedBase=True)
         p.getBasePositionAndOrientation(self.robotId)
 
         # Create the robot wrapper in pinocchio.
@@ -62,8 +70,9 @@ class TeststandRobot(PinBulletWrapper):
         )
         
         if fixed_height:
+            # Note: Need to offset the constraint point on the body.
             p.createConstraint(self.robotId, 0, -1, -1, p.JOINT_FIXED,
-                [0, 0, 0], [0, 0, 0.],[0 ,0 , fixed_height])
+                [0, 0, 0.0], [0, 0, -0.05],[0 ,0 , fixed_height])
 
     def forward_robot(self, q=None, dq=None):
         if not q:
