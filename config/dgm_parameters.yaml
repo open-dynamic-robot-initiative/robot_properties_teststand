@@ -34,6 +34,10 @@ device:
       size: 3
     ati_torque:
       size: 3
+    imu_acceleration:
+      size: 3
+    imu_ang_acceleration:
+      size: 3
   controls:
     ctrl_joint_torques:
       size: 2
