@@ -1,0 +1,7 @@
+<launch>
+    <!-- Setup the arguments -->
+    <arg name="robot_model" default="teststand" doc="name of the urdf file without extension."/>
+
+    <!--Start the executable manage the dynamic graph and the robot control-->
+    <node pkg="dg_blmc_robots" type="demo_dg_$(arg robot_model)" name="main_$(arg robot_model)" output="screen"/>
+</launch>

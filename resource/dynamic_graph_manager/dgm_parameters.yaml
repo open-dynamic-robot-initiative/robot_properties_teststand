@@ -1,0 +1,49 @@
+# 
+# @file dgm_parameters.yaml
+# @author Maximilien Naveau (maximilien.naveau@gmail.com)
+# @license License BSD-3-Clause
+# @copyright Copyright (c) 2019, New York University and Max Planck Gesellschaft.
+# @date 2019-05-22
+# 
+# @brief Define the interface between the control and the hardware
+# 
+
+is_real_robot: true
+device:
+  name: "hopper_teststand"
+  sensors:
+    # joints data
+    joint_positions:
+      size: 2
+    joint_velocities:
+      size: 2
+    joint_torques:
+      size: 2
+    joint_target_torques:
+      size: 2
+    joint_encoder_index:
+      size: 2
+    # additional data
+    contact_sensors:
+      size: 1
+    slider_positions:
+      size: 2
+    height_sensors:
+      size: 1
+    ati_force:
+      size: 3
+    ati_torque:
+      size: 3
+  controls:
+    ctrl_joint_torques:
+      size: 2
+hardware_communication:
+  max_missed_control: 10
+  control_period: 1000000 # in nano second this means 1ms <=> 1kz
+  maximum_time_for_user_cmd: 100000
+  calibration:
+    index_to_zero_angle: [-0.354043, -0.243433]
+
+debug_timer_history_length: 0
+
+motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
