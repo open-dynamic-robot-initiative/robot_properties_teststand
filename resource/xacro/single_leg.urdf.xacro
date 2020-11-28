@@ -9,7 +9,7 @@
   <xacro:property name="base_h" value=".2" />
   <xacro:property name="base_m" value="0.485" />
 
-  <xacro:include filename="$(find robot_properties_teststand)/xacro_include/leg.xacro" />
+  <xacro:include filename="leg.xacro" />
 
   <link name="base" />
 

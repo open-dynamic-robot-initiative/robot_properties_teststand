@@ -9,9 +9,9 @@
 
 import numpy as np
 from math import pi
-import rospkg
+from ament_index_python.packages import get_package_share_directory
 from os.path import join, dirname
-import pinocchio as se3
+import pinocchio
 from pinocchio.utils import zero
 from pinocchio.robot_wrapper import RobotWrapper
 
@@ -27,17 +27,17 @@ class TeststandConfig:
 
     # here we use the same urdf as for the quadruped but without the freeflyer
     urdf_path = (
-        join(rospkg.RosPack().get_path("robot_properties_teststand"),
+        join(get_package_share_directory("robot_properties_teststand"),
              "urdf",
              "teststand.urdf")
     )
 
     meshes_path = [
-        dirname(rospkg.RosPack().get_path("robot_properties_" + robot_name))
+        dirname(get_package_share_directory("robot_properties_" + robot_name))
     ]
 
     yaml_path = (
-        join(rospkg.RosPack().get_path("robot_properties_teststand"),
+        join(get_package_share_directory("robot_properties_teststand"),
              "config",
              "dgm_parameters.yaml")
     )
@@ -52,7 +52,7 @@ class TeststandConfig:
     motor_torque_constant = 0.025
 
     # pinocchio model
-    robot_model = se3.buildModelFromUrdf(urdf_path)
+    robot_model = pinocchio.buildModelFromUrdf(urdf_path)
     robot_model.rotorInertia[1:] = motor_inertia
     robot_model.rotorGearRatio[1:] = motor_gear_ration
 
