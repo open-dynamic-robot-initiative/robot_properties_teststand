@@ -12,12 +12,15 @@ All rights reserved.
 
 import time
 import numpy as np
+import pybullet as p
+from bullet_utils.env import BulletEnvWithGround
 from robot_properties_teststand.teststand_wrapper import TeststandRobot, TeststandConfig
 
 if __name__ == "__main__":
 
     # Create a robot instance. This initializes the simulator as well.
-    robot = TeststandRobot()
+    env = BulletEnvWithGround(p.GUI)
+    robot = env.add_robot(TeststandRobot)
     tau = np.zeros(robot.nb_dof)
 
     # Reset the robot to some initial state.

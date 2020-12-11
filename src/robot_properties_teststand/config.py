@@ -9,15 +9,15 @@
 
 import numpy as np
 from math import pi
-from ament_index_python.packages import get_package_share_directory
-from os.path import join, dirname
 import pinocchio
 from pinocchio.utils import zero
 from pinocchio.robot_wrapper import RobotWrapper
+from robot_properties_teststand.utils import find_paths
 
 
 class TeststandConfig:
     # name that is used by every other entities.
+    robot_family = "teststand"
     robot_name = "teststand"
 
     # PID gains
@@ -25,22 +25,11 @@ class TeststandConfig:
     kd = 0.1
     ki = 0.0
 
-    # here we use the same urdf as for the quadruped but without the freeflyer
-    urdf_path = (
-        join(get_package_share_directory("robot_properties_teststand"),
-             "urdf",
-             "teststand.urdf")
-    )
-
-    meshes_path = [
-        dirname(get_package_share_directory("robot_properties_" + robot_name))
-    ]
-
-    yaml_path = (
-        join(get_package_share_directory("robot_properties_teststand"),
-             "config",
-             "dgm_parameters.yaml")
-    )
+    # Here we use the same urdf as for the quadruped but without the freeflyer.
+    paths = find_paths(robot_name)
+    meshes_path = paths["resources"]
+    yaml_path = paths["dgm_yaml"]
+    urdf_path = paths["urdf"]
 
     # The inertia of a single blmc_motor
     motor_inertia = 0.0000045

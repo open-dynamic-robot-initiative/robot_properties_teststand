@@ -34,7 +34,7 @@
     <visual>
         <origin rpy="0 0 0" xyz="0 0 ${base_h/2.}"/>
         <geometry>
-          <mesh filename="package://robot_properties_teststand/meshes/cube.obj" scale="${base_l} ${base_w} ${base_h}"/>
+          <mesh filename="package://meshes/cube.obj" scale="${base_l} ${base_w} ${base_h}"/>
         </geometry>
         <material name="white">
             <color rgba="1 1 1 1"/>
