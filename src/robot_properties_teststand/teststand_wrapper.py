@@ -4,7 +4,7 @@ import os
 import pybullet
 from bullet_utils.wrapper import PinBulletWrapper
 from robot_properties_teststand.config import TeststandConfig
-
+from robot_properties_teststand.utils import find_paths
 
 dt = 1e-3
 
@@ -18,6 +18,7 @@ class TeststandRobot(PinBulletWrapper):
         if orn is None:
             orn = pybullet.getQuaternionFromEuler([0, 0, 0])
 
+        pybullet.setAdditionalSearchPath(TeststandConfig.paths["package"])
         self.urdf_path = TeststandConfig.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,

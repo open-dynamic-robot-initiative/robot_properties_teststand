@@ -54,7 +54,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-            <mesh filename="package://meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_teststand/meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
@@ -64,7 +64,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-            <mesh filename="package://meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_teststand/meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
@@ -106,7 +106,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
+          <mesh filename="package://robot_properties_teststand/meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
@@ -116,7 +116,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
+          <mesh filename="package://robot_properties_teststand/meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
@@ -155,7 +155,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
+          <mesh filename="package://robot_properties_teststand/meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
@@ -165,7 +165,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-            <mesh filename="package://meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_teststand/meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
