@@ -1,49 +1,31 @@
 import numpy as np
 import time
 import os
-from ament_index_python.packages import get_package_share_directory
 import pybullet
-from py_pinocchio_bullet.wrapper import PinBulletWrapper
-from py_robot_properties_teststand.config import TeststandConfig
-
+from bullet_utils.wrapper import PinBulletWrapper
+from robot_properties_teststand.config import TeststandConfig
+from robot_properties_teststand.utils import find_paths
 
 dt = 1e-3
 
-
 class TeststandRobot(PinBulletWrapper):
-    @staticmethod
-    def initPhysicsClient():
-        physicsClient = pybullet.connect(pybullet.GUI)
-        pybullet.setGravity(0, 0, -9.81)
-        pybullet.setPhysicsEngineParameter(fixedTimeStep=dt, numSubSteps=1)
-        return physicsClient
 
-    def __init__(self, physicsClient=None, fixed_height=None):
-        if physicsClient is None:
-            self.physicsClient = self.initPhysicsClient()
-
-        # Load the plain.
-        plain_urdf = os.path.join(
-            get_package_share_directory("pinocchio_bullet"), "urdf", "ground.urdf"
-        )
-        self.planeId = pybullet.loadURDF(plain_urdf)
+    def __init__(self, pos=None, orn=None, fixed_height=None):
 
         # Load the robot
-        robotStartPos = [0, 0, 0.0]
-        robotStartOrientation = pybullet.getQuaternionFromEuler([0, 0, 0])
+        if pos is None:
+            pos = [0.0, 0, 0.40]
+        if orn is None:
+            orn = pybullet.getQuaternionFromEuler([0, 0, 0])
 
+        pybullet.setAdditionalSearchPath(TeststandConfig.paths["package"])
         self.urdf_path = TeststandConfig.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,
-            robotStartPos,
-            robotStartOrientation,
+            pos, orn,
             flags=pybullet.URDF_USE_INERTIA_FROM_FILE,
             useFixedBase=False,
         )
-        pybullet.getBasePositionAndOrientation(self.robotId)
-
-        # Create the robot wrapper in pinocchio.
-        package_dirs = [os.path.dirname(os.path.dirname(self.urdf_path)) + "/urdf"]
         self.pin_robot = TeststandConfig.buildRobotWrapper()
 
         # Query all the joints.
