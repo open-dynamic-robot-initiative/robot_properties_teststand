@@ -25,7 +25,7 @@ def find_resources(package_name):
                 resources.append(src)
     return resources
 
-# provide old names for compatiblity
+# provide old names for compatibility
 package_name = "robot_properties_teststand"
 package_names = [package_name, 
                 "py_robot_properties_teststand"]
@@ -63,7 +63,8 @@ setup(
                       "xacro", 
                       "pybullet", 
                       "importlib_resources",
-                      "meshcat"],
+                      "meshcat",
+                      "bullet_utils"],
     zip_safe=True,
     maintainer="mnaveau",
     maintainer_email="mnaveau@tuebingen.mpg.de",
