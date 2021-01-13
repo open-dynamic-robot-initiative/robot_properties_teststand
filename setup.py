@@ -37,13 +37,6 @@ with open(path.join(path.dirname(path.realpath(__file__)), "readme.md"), "r") as
 # Find the resource files.
 resources = find_resources(package_name)
 
-# Install the package.xml.
-data_files_to_install = [(path.join("share", package_name), ["package.xml"])]
-data_files_to_install += [
-    ("share/ament_index/resource_index/packages", 
-    [path.join("src", package_name, package_name, package_name)])
-]
-
 # Install nodes and demos.
 scripts_list = []
 for (root, _, files) in walk(path.join("demos")):
