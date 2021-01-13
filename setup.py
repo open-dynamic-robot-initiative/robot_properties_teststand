@@ -50,7 +50,6 @@ setup(
     package_dir={name:path.join("src", name) for name in package_names},
     packages=[package_name],
     package_data={package_name: resources},
-    data_files=data_files_to_install,
     scripts=scripts_list,
     install_requires=["setuptools", 
                       "xacro", 
