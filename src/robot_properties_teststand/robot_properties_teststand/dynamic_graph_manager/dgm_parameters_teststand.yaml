@@ -8,7 +8,7 @@
 # @brief Define the interface between the control and the hardware
 # 
 
-is_real_robot: true
+# This defines the dynamic-graph device
 device:
   name: "hopper_teststand"
   sensors:
@@ -24,26 +24,31 @@ device:
     joint_encoder_index:
       size: 2
     # additional data
-    contact_sensors:
-      size: 1
-    slider_positions:
-      size: 2
     height_sensors:
       size: 1
     ati_force:
       size: 3
     ati_torque:
       size: 3
+    # robot status
+    motor_enabled:
+      size: 2
+    motor_ready:
+      size: 2
+    motor_board_enabled:
+      size: 1
+    motor_board_errors:
+      size: 1
+    
   controls:
     ctrl_joint_torques:
       size: 2
+
+# This defines the hardware control.
 hardware_communication:
+  network_id: "ens4"
   max_missed_control: 10
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
   maximum_time_for_user_cmd: 100000
-  calibration:
-    index_to_zero_angle: [-0.354043, -0.243433]
 
 debug_timer_history_length: 0
-
-motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt

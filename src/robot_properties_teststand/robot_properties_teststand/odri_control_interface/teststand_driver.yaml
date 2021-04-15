@@ -1,0 +1,51 @@
+#
+# Bolt driver parameterization
+#
+
+#
+# Map of the joints:
+#
+# +----------|------------|---------|------------|-------------+
+# + joint_id | joint_name | udriver | motor_port | motor_index +
+# +==========|============|=========|============|=============+
+# +    0     |   L_HFE    |   0     |    0       |     0       +
+# +----------|------------|---------|------------|-------------+
+# +    1     |   L_KFE    |   0     |    1       |     1       +
+# +----------|------------|---------|------------|-------------+
+#
+
+robot:
+    interface: ens4
+    joint_modules:
+        motor_numbers: [1, 0]
+        motor_constants: 0.025
+        gear_ratios: 9.
+        max_currents: 12.
+        reverse_polarities: [
+            false, false
+        ]
+        # Here is -2 * pi
+        lower_joint_limits: [
+            -6.28, -6.28
+        ]
+        # Here is +2 * pi
+        upper_joint_limits: [
+            +6.28, +6.28
+        ]
+        max_joint_velocities: 80.
+        safety_damping: 0.3
+    imu:
+        rotate_vector: [1, 2, 3]
+        orientation_vector: [1, 2, 3, 4]
+
+#
+# Joint calibrator parameters.
+#
+joint_calibrator:
+    # Can be either POS, NEG, ALT or AUTO
+    search_methods: [POS, POS]
+    position_offsets:  [0.349, 0.550, ]
+    Kp: 3.
+    Kd: 0.05
+    T: 1.0
+    dt: 0.001
