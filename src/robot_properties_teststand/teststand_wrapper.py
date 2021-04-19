@@ -24,7 +24,7 @@ class TeststandRobot(PinBulletWrapper):
             self.urdf_path,
             pos, orn,
             flags=pybullet.URDF_USE_INERTIA_FROM_FILE,
-            useFixedBase=False,
+            useFixedBase=True,
         )
         self.pin_robot = TeststandConfig.buildRobotWrapper()
 

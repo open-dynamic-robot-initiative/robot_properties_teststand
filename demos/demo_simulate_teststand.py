@@ -20,7 +20,8 @@ if __name__ == "__main__":
 
     # Create a robot instance. This initializes the simulator as well.
     env = BulletEnvWithGround(p.GUI)
-    robot = env.add_robot(TeststandRobot)
+    robot = TeststandRobot(fixed_height=True)
+    env.add_robot(robot)
     tau = np.zeros(robot.nb_dof)
 
     # Reset the robot to some initial state.
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     robot.reset_state(q0, dq0)
 
     # Run the simulator for 100 steps
-    for i in range(500):
+    for i in range(500000):
         # TODO: Implement a controller here.
         robot.send_joint_command(tau)
 
