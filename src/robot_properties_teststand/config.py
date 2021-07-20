@@ -30,6 +30,7 @@ class TeststandConfig:
     meshes_path = paths["package"]
     dgm_yaml_path = paths["dgm_yaml"]
     urdf_path = paths["urdf"]
+    urdf_path_no_prismatic = paths["urdf_no_prismatic"]
 
     # The inertia of a single blmc_motor
     motor_inertia = 0.0000045

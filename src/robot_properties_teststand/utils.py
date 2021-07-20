@@ -25,10 +25,11 @@ def find_paths(robot_name, robot_family="teststand"):
     resources_dir = package_dir/("robot_properties_" + robot_family)
     dgm_yaml_path = resources_dir/"dynamic_graph_manager"/("dgm_parameters_" + robot_name + ".yaml")
     urdf_path = resources_dir/(robot_name + ".urdf")
+    urdf_no_prismatic = resources_dir/(robot_name + "_no_prismatic.urdf")
     srdf_path = resources_dir/"srdf"/(robot_family + ".srdf")
     ctrl_path = resources_dir/"impedance_ctrl.yaml"
 
-    if not urdf_path.exists():
+    if not urdf_path.exists() or not urdf_no_prismatic.exists():
         build_xacro_files(resources_dir)
 
     paths = {"package":str(package_dir),
@@ -36,6 +37,7 @@ def find_paths(robot_name, robot_family="teststand"):
              "dgm_yaml":str(dgm_yaml_path),
              "srdf":str(srdf_path),
              "urdf":str(urdf_path),
+             "urdf_no_prismatic": str(urdf_no_prismatic),
              "imp_ctrl_yaml":str(ctrl_path)}
 
     return paths
