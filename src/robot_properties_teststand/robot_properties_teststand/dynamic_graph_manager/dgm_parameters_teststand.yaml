@@ -43,12 +43,17 @@ device:
   controls:
     ctrl_joint_torques:
       size: 2
-
+    ctrl_heart_beat:
+      size: 1
 # This defines the hardware control.
 hardware_communication:
   network_id: "ens4"
   max_missed_control: 10
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
   maximum_time_for_user_cmd: 100000
+
+  ros_node_name: "teststand"
+  shared_memory_name: "DGM_ShM"
+  cpu_id: 0
 
 debug_timer_history_length: 0
